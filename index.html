@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+</head>
+<body>
+    <h1>chart project</h1>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+        let chart;
+
+        const datas = {
+            labels: [],
+            datasets: [{
+                label: 'temperature 2024',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192,1)',
+                tension: 0.1
+            }]
+        };
+      
+        const chartConfig = {
+            type: 'line',
+            data: datas,
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Day',
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Value',
+                        },
+                    },
+                },
+                animation: false,
+            },
+        };
+
+        chart = new Chart(ctx, chartConfig);
+        //adding data'
+        function fetchData(){
+            let res = Math.random()*50;
+            console.log(res);
+            chart.data.labels.push(chart.data.labels.length);
+            chart.data.datasets[0].data.push(res);
+            chart.update(); 
+
+        }
+        setInterval(() => {
+            fetchData();
+        },1000);
+      </script>
+      
+    <!-- <script src="./index.js"></script> -->
+</body>
+</html>
